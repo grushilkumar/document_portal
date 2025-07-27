@@ -1,7 +1,7 @@
 import yaml
 import os
 
-def load_config(config_path: str = "config\config.yaml") -> dict:
+def load_config(config_path: str = "config\config.yaml") -> dict:  # type: ignore
     """
     Loads a YAML configuration file.
     It constructs an absolute path to 'config/config.yaml' from the project root.
