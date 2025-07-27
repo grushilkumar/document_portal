@@ -4,6 +4,7 @@ import sys
 from dotenv import load_dotenv
 from utils.config_loader import load_config
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from pydantic import SecretStr
 
 from langchain_groq import ChatGroq
 #from langchain_openai import ChatOpenAI
@@ -77,7 +78,7 @@ class ModelLoader:
         if provider == "groq":
             llm=ChatGroq(
                 model=model_name,
-                api_key=self.api_keys["GROQ_API_KEY"],
+                api_key=SecretStr(self.api_keys["GROQ_API_KEY"] or ""),
                 temperature=temperature,
             )
             return llm
@@ -85,9 +86,9 @@ class ModelLoader:
         elif provider == "openai":
             return ChatOpenAI(
                 model=model_name,
-                api_key=self.api_keys["OPENAI_API_KEY"],
+                api_key=SecretStr(self.api_keys["OPENAI_API_KEY"] or ""),
                 temperature=temperature,
-                max_tokens=max_tokens
+                max_completion_tokens=max_tokens
             )
         else:
             log.error("Unsupported LLM provider", provider=provider)
