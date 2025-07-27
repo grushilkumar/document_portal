@@ -108,5 +108,5 @@ if __name__ == "__main__":
     print(f"LLM Loaded: {llm}")
     
     # Test the ModelLoader
-    result=llm.invoke("Hello, how are you?")
+    result=llm.invoke("Hi, WHo are you? what you do?")
     print(f"LLM Result: {result.content}")
